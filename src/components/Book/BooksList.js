@@ -2,7 +2,7 @@ import React from "react";
 import { BeatLoader } from "react-spinners";
 import { useSelector } from "react-redux";
 
-const BooksList = ({ isLoading, data, deleteBook, dispatch }) => {
+const BooksList = ({ isLoading, data, deleteBook, getBookId, dispatch }) => {
   const { isLogin } = useSelector((state) => state.auth);
 
   const bookList =
@@ -15,7 +15,11 @@ const BooksList = ({ isLoading, data, deleteBook, dispatch }) => {
             >
               <div>{item.title}</div>
               <div className="btn-group" role="group">
-                <button type="button" className="btn btn-primary">
+                <button
+                  type="button"
+                  className="btn btn-primary"
+                  onClick={() => getBookId(item.id)}
+                >
                   Read
                 </button>
                 <button
