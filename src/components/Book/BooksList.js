@@ -2,7 +2,7 @@ import React from "react";
 import { BeatLoader } from "react-spinners";
 import { useSelector } from "react-redux";
 
-const BooksList = ({ isLoading, data }) => {
+const BooksList = ({ isLoading, data, deleteBook, dispatch }) => {
   const { isLogin } = useSelector((state) => state.auth);
 
   const bookList =
@@ -22,6 +22,16 @@ const BooksList = ({ isLoading, data }) => {
                   type="button"
                   className="btn btn-danger"
                   disabled={!isLogin}
+                  onClick={() =>
+                    dispatch(deleteBook(item))
+                      .unwrap()
+                      .then((originalPromiseResult) => {
+                        console.log(originalPromiseResult);
+                      })
+                      .catch((rejectedValueOrSerializedError) => {
+                        console.log(rejectedValueOrSerializedError);
+                      })
+                  }
                 >
                   Delete
                 </button>
